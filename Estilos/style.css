@@ -1,0 +1,205 @@
+/* Resetear algunos valores de padding y margin por defecto */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('../Estilos/FondoAncho.jpg'); /* Cambiar la ruta según la ubicación de la imagen */
+    background-size: cover;
+    color: white;
+}
+
+#cabecera {
+    display: flex;
+    flex-direction: column;
+}
+
+#logo img {
+    width: 100%;
+}
+
+#menu ul {
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #00FFFF; /* Color de neón azul */
+}
+
+#menu li {
+   list-style-type:none; 
+   border-right :2px solid #00FFFF; /* Color de neón azul */
+   padding :15px
+}
+#menu li:last-child{
+border:none;
+
+}
+
+
+a{
+color:white; 
+text-decoration:none
+}
+a:hover{
+color :#00FFFF; /* Color de neón azul */
+background-color: black;
+
+
+}
+
+
+/* Estilo de botón de neón para los elementos del menú */
+a.neon-button {
+  font-family:'Arial', sans-serif;
+  font-size :20px ;
+  text-decoration:none ;
+  
+  padding :10px ;
+  
+  color:#fff ;
+  
+  border-radius :25px ;
+  
+  -webkit-mask-image:-webkit-radial-gradient(circle,#fff,#000) ;
+  
+  
+}
+
+
+/* Estilo para formInsertar */
+
+#form{
+
+margin:auto ; 
+width :50% ; 
+border-radius :25px ; 
+
+border-style:solid ; 
+
+border-color:#00FFFF ; /* Color de neón azul */
+
+padding-bottom :20px ;
+
+padding-top :20px ;
+
+background-color:black;
+
+opacity:.8;
+
+margin-top: 3%;
+text-align: center;
+}
+
+
+label,input[type="text"],input[type="submit"]{
+
+display:block ; 
+
+margin:auto ; 
+
+margin-bottom :10px ;
+
+
+}
+
+/* Estilo para el botón de insertar */
+
+input[type="submit"] {
+
+    font-family:'Arial', sans-serif;
+    font-size :20px ;
+    text-decoration:none ;
+    
+    padding :10px ;
+    
+    color:#fff ;
+    
+    border-radius :25px ;
+    
+    -webkit-mask-image:-webkit-radial-gradient(circle,#fff,#000) ;
+  
+    border-color: #00FFFF; 
+  
+    background-color: #00FFFF; 
+  
+  }
+  
+  /* Estilo para el div de respuesta */
+  
+  #respuesta{
+  margin:auto ; 
+  width :50% ; 
+  border-radius :25px ; 
+  
+  border-style:solid ; 
+  
+  border-color:#00FFFF ; /* Color de neón azul */
+  
+  padding-bottom :20px ;
+  
+  padding-top :20px ;
+  
+  background-color:black;
+  
+  opacity:.8;
+  
+  text-align: center; /* Centrar el texto */
+  
+  }
+  
+
+/* Estilo para el footer */
+
+.pie {
+    margin-top: 3%;
+    display: flex; /* Mantener la dirección de los elementos a horizontal */
+    justify-content: space-around; /* Distribuir los elementos de forma equitativa */
+    align-items: center; /* Alinear los elementos verticalmente */
+    border-top: 2px solid #00FF00; /* Color de neón verde */
+    border-bottom: 2px solid #00FF00; /* Color de neón verde */
+    padding: 15px;
+    text-align: center; /* Centrar el texto */
+}
+
+/* Estilo para las secciones del footer */
+
+.footer-section {
+    border-left: 2px solid #00FF00; /* Color de neón verde */
+    border-right: 2px solid #00FF00; /* Color de neón verde */
+    padding: 10px;
+    margin: 10px;
+    flex: 1; /* Hacer que los elementos ocupen todo el ancho disponible */
+}
+
+/* Estilo para los iconos de redes sociales */
+
+.social-icons img {
+    border-radius: 50%; /* Hacer los iconos redondos */
+}
+
+/* Estilo para la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Add a hover effect for rows */
+tr:hover {
+   background-color:#ff8080; 
+}
+  
+

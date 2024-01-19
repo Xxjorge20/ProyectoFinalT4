@@ -113,6 +113,13 @@
 
                 $productos = $sentencia->fetchAll();
                 // mONTAR ARRAY
+
+                while($producto = $sentencia->fetch()){
+                    $productos[] = $producto;
+                }
+                // montar proveedor
+                
+
                 return $productos;
 
             }catch(PDOException $e){

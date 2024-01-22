@@ -1,2 +1,2 @@
 #ignorar archivos DatosConexion.php
-git update-index --assume-unchanged DatosConexion.php
+git rm --cached DatosConexion.php

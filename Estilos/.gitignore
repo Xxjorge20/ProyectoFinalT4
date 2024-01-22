@@ -1,4 +1,0 @@
-# ignorar la carpeta Imagenes
-git rm -r --cached Imagenes
-#ignorar la carpeta RedesSociales
-git rm -r --cached RedesSociales

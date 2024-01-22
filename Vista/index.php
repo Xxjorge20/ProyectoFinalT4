@@ -27,8 +27,8 @@
     <div id = "form">
         <h1>Gestion Usuario - Iniciar Sesion</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <label for="usuario">Usuario</label>
-            <input type="usuario" name="usuario" id="usuario" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
             <br>
             <label for="password">Contraseña</label>
             <input type="password" name="password" id="password" required>

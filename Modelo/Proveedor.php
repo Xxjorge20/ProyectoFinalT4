@@ -3,7 +3,7 @@
     class Proveedor{
 
         // Atributos
-        private int $Codigo;
+        private String $Codigo;
         private String $Correo;
         private String $Contrasenia;
         private String $Nombre;
@@ -11,7 +11,9 @@
         private Array $Productos;
 
         // Constructor
-        public function __construct(String $correo, String $contrasenia, String $nombre, String $apellidos){
+        public function __construct(String $codigo, String $correo, String $contrasenia, String $nombre, String $apellidos){
+            
+            $this->Codigo = $codigo;
             $this->Correo = $correo;
             $this->Contrasenia = $contrasenia;
             $this->Nombre = $nombre;
@@ -71,11 +73,12 @@
         // Métodos
 
         public function __toString() : String {
-            return "Código: " . $this->codigo . "<br>" .
-                    "Correo electrónico: " . $this->correo . "<br>" .
-                    "Contraseña: " . $this->contrasenia . "<br>" .
-                    "Nombre: " . $this->nombre . "<br>" .
-                    "Apellidos: " . $this->apellidos . "<br>";
+            return "Código: " . $this->Codigo . "<br>" .
+            "Correo: " . $this->Correo . "<br>" .
+            "Contraseña: " . $this->Contrasenia . "<br>" .
+            "Nombre: " . $this->Nombre . "<br>" .
+            "Apellidos: " . $this->Apellidos . "<br>";
+            "Productos: " . $this->Productos . "<br>";
         }
 
 

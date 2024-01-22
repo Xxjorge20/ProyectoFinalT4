@@ -24,12 +24,17 @@
         <div id = "form">
         <h1>Gestion Usuario - Registrar Usuario</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <label for="usuario">Usuario</label>
-            <input type="usuario" name="usuario" id="usuario" required>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" required>
+            <br>
+            <label for="apellidos">Apellidos</label>
+            <input type="text" name="apellidos" id="apellidos" required>
+            <br>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
             <br>
             <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" required>
-            <br>
+            <input type="password" name="password" id="password" required>   
             <br>
             <input type="submit" value="registrar Usuario" name="registrarUsuario">
             
@@ -44,11 +49,11 @@
 
     <div id="respuesta">
         <?php
-            include_once '../Controlador/controladorUsuario.php';
+            include_once '../Controlador/ControladorUsuario.php';
 
-            if(isset($_POST['logearUsuario'])){
+            if(isset($_POST['registrarUsuario'])){
 
-                $escorrecto = loginUsuario();
+                $escorrecto = registrarUsuario();
                 if($escorrecto){
                     // Informamos al usuario de que se ha registrado correctamente
                     echo "<script>alert('Usuario logeado correctamente');</script>";
@@ -59,9 +64,9 @@
                 }
             }
 
-            if(isset($_POST['registrarUsuario'])){
+            if(isset($_POST['iniciarSesion'])){
                 // Redirigimos al usuario a la página de registro
-                echo "<script>window.location.href='../Vista/formRegistro.php';</script>";
+                echo "<script>window.location.href='../Vista/index.php';</script>";
             }
         ?>
     </div>

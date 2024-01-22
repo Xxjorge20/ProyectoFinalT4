@@ -22,7 +22,7 @@ Para usar este proyecto, abre los archivos PHP en tu servidor local y sigue las 
 <hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
 
 ## Contribución
-Si deseas contribuir al proyecto, por favor crea una pull request.
+Si deseas contribuir al proyecto, próximamente....
 
 <hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
 
@@ -35,3 +35,15 @@ Este proyecto está bajo la licencia MIT.
 Este proyecto ha sido desarrollado por el Reino de Luque
 
 <hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+
+## Control de versiones
+
+1.0 se creado el proyecto e implementado el modelo de datos
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+
+1.01 Búsqueda de errores en el modelo de datos y soluciones e implementación del MVC. También se le ha echo el CSS Inicial.
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+
+1.02 Comprobacion de las clases de modelo para que funcionen perfectamente e implementacion de los primeros formularios

@@ -10,36 +10,37 @@
          * @return bool Retorna true si el proveedor se registró correctamente, de lo contrario retorna false.
          */
 
-        public static function insertProveedor(Proveedor $proveedor) : bool{
+        public static function insert(Proveedor $proveedor) : bool{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
+            $escorrecto = false;
 
             try{
 
-                $escorrecto = false;
-
+                $conexion = Conexion::conectarDB();
+                $codigo = $proveedor->getCodigo();
                 $correo = $proveedor->getCorreo();
                 $contrasenia = $proveedor->getContrasenia();
                 $nombre = $proveedor->getNombre();
                 $apellidos = $proveedor->getApellidos();
                 
 
-
-                $sql = "INSERT INTO usuarios (Correo, Contrasenia, Nombre, Apellidos) VALUES (:correo, :contrasenia, :nombre, :apellidos)";
+                $sql = "INSERT INTO proveedor(Codigo, Correo, Contrasenia, Nombre, Apellidos) VALUES(:Codigo, :Correo, :Contrasenia, :Nombre, :Apellidos)";
                 $sentencia = $conexion->prepare($sql);
                 $escorrecto = $sentencia->execute([
-                    "correo" => $correo,
-                    "contrasenia" => password_hash($contrasenia, PASSWORD_DEFAULT),
-                    "nombre" => $nombre,
-                    "apellidos" => $apellidos
+                    "Codigo" => $codigo,
+                    "Correo" => $correo,
+                    "Contrasenia" => password_hash($contrasenia, PASSWORD_DEFAULT),
+                    "Nombre" => $nombre,
+                    "Apellidos" => $apellidos
                 ]);
-
-                return $escorrecto;
+                
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
+
+            return $escorrecto;
         }
 
         /**
@@ -49,14 +50,11 @@
          * @param string $password La contraseña del proveedor.
          * @return bool Retorna true si la autenticación es exitosa, de lo contrario retorna false.
          */
-        public static function searchProveedor(string $email, string $password) : Proveedor{
-
-            include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
-            $proveedor = new Proveedor();
+        public static function login(string $email, string $password) : Proveedor{
 
             try{
-
+                include_once( __DIR__ . '/../Conexion/Conexion.php');
+                $conexion = Conexion::conectarDB();
                 $sql = "SELECT * FROM usuarios WHERE Correo = :Correo";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute(["Correo" => $email]);
@@ -65,20 +63,16 @@
 
                 if($usuario && password_verify($password, $usuario['Contrasenia'])){
               
-                    $proveedor->setCodigo($usuario['Codigo']);
-                    $proveedor->setCorreo($usuario['Correo']);
-                    $proveedor->setContrasenia($usuario['Contrasenia']);
-                    $proveedor->setNombre($usuario['Nombre']);
-                    $proveedor->setApellidos($usuario['Apellidos']);
-                    $proveedor->setProductos(null);
-                    
-                }
+                    $proveedor = new Proveedor($usuario['Codigo'], $usuario['Correo'], $usuario['Contrasenia'], $usuario['Nombre'], $usuario['Apellidos']);
+                    $proveedor = self::getFull($proveedor->getCodigo());
 
-                return $proveedor;
+                }
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
+
+            return $proveedor;
         }
 
         /**
@@ -87,28 +81,27 @@
          * @param string $codigo El código del proveedor.
          * @return Proveedor El proveedor con sus productos.
          */
-        public static function getProveedorCompleto(String $codigo) : Proveedor{
+        public static function getFull(String $codigo) : Proveedor{
 
             // llamar al productos db y devolver los productos de ese proveedor
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
-            
             $productos = [];
 
             try {
 
+                $conexion = Conexion::conectarDB();
                 $proveedor = self::getProveedor($codigo);
-                $productos = ProductosDB::searchByProveedor($proveedor);
-
+                $productos = ProductosDB::getProveedor($proveedor);
                 $proveedor->setProductos($productos);
 
-                return $proveedor;
+                
 
 
             } catch (\Throwable $th) {
-                echo "Error: " . $e->getMessage();
+                echo "Error: " . $th->getMessage();
             }
 
+            return $proveedor;
         }
 
         /**
@@ -120,25 +113,24 @@
         public static function getProveedor(String $codigo) : Proveedor{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
-
+            
             try{
 
-                $sql = "SELECT * FROM proveedores WHERE Codigo = :Codigo";
+                $conexion = Conexion::conectarDB();
+                $sql = "SELECT * FROM proveedor WHERE Codigo = :Codigo";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute(["Codigo" => $codigo]);
 
-                $proveedor = $sentencia->fetch(PDO::FETCH_CLASS, "Proveedor");
+                $proveedor = $sentencia->fetch(PDO::FETCH_ASSOC);
+                $proveedorObtenido = new Proveedor($proveedor['Codigo'], $proveedor['Correo'], $proveedor['Contrasenia'], $proveedor['Nombre'], $proveedor['Apellidos']);
+
                 
-                // Montar Objeto Proveedor
-
-                $proveedor->setProductos(null);
-
-                return $proveedor;
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
+
+            return $proveedorObtenido;
         }
 
         /**
@@ -151,12 +143,11 @@
         public static function update(Proveedor $proveedor) : bool{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
+            $escorrecto = false;
 
             try{
 
-                $escorrecto = false;
-
+                $conexion = Conexion::conectarDB();
                 $codigo = $proveedor->getCodigo();
                 $correo = $proveedor->getCorreo();
                 $contrasenia = $proveedor->getContrasenia();

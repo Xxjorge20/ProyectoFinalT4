@@ -2,6 +2,9 @@
 
 class Producto {
 
+    // Enumeracion de los tipos de productos
+    public const TIPOS = array("Libros", "Cartas", "Mapas", "Figuras", "Otros");
+
     // Atributos
     private String $Id;
     private String $Nombre;
@@ -13,7 +16,7 @@ class Producto {
 
     //  Getters y Setters
 
-    public function getId() : String {
+    public function getCodigo() : String {
         return $this->Id;
     }
 
@@ -61,9 +64,10 @@ class Producto {
 
 
     // Constructor
-    public function __construct(String $nombre, String $descripcion, 
+    public function __construct(String $id, String $nombre, String $descripcion, 
     float $precio, int $stock, Proveedor $proveedor) 
     {
+        $this->Id = $id;
         $this->Nombre = $nombre;
         $this->Descripcion = $descripcion;
         $this->Precio = $precio;

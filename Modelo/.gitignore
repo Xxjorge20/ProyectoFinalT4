@@ -1,0 +1,2 @@
+# ignorar el archivo pruebaDB.php
+git update-index --assume-unchanged pruebaDB.php

@@ -11,20 +11,22 @@
          */
         public static function insert(Producto $producto, Proveedor $proveedor) : bool{
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
             $insertadoCorrectamente = false;
 
             try{
-                
-                $sql = "INSERT INTO productos (Nombre, Descripcion, Precio, Stock, CodigoProveedor) VALUES (:Nombre, :Descripcion, :Precio, :Stock, :CodigoProveedor)";
+
+                $conexion = Conexion::conectarDB();
+                $sql = "INSERT INTO productos (Codigo, Nombre, Descripcion, Precio, Stock, CodigoProveedor) VALUES (:Codigo, :Nombre, :Descripcion, :Precio, :Stock, :CodigoProveedor)";
                 $sentencia = $conexion->prepare($sql);
-                $insertadoCorrectamente =  $sentencia->execute([
+                $insertadoCorrectamente = $sentencia->execute([
+                    "Codigo" => $producto->getCodigo(),
                     "Nombre" => $producto->getNombre(),
                     "Descripcion" => $producto->getDescripcion(),
                     "Precio" => $producto->getPrecio(),
                     "Stock" => $producto->getStock(),
                     "CodigoProveedor" => $proveedor->getCodigo()
                 ]);
+
 
                 return $insertadoCorrectamente; 
 
@@ -43,19 +45,23 @@
          * @return array Los productos que coinciden con la descripción y proveedor especificados.
          */
 
-        public static function searchByDescription(String $descripcion, Proveedor $proveedor) : Array{
+        public static function getDescription(String $descripcion, Proveedor $proveedor) : Array{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
             $productos = [];
 
             try{
+
+                $conexion = Conexion::conectarDB();
                 $sql = "SELECT * FROM productos WHERE Descripcion LIKE :Descripcion AND CodigoProveedor = :CodigoProveedor";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute(["Descripcion" => "%" . $descripcion . "%", "CodigoProveedor" => $proveedor->getCodigo()]);
-                $sentencia->setFetchMode(PDO::FETCH_CLASS, "Producto");
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
 
-                $productos = $sentencia->fetchAll();
+                while($producto = $sentencia->fetch()){
+                    $producto = new Producto($producto["Codigo"], $producto["Nombre"], $producto["Descripcion"], $producto["Precio"], $producto["Stock"],$proveedor);
+                    $productos[] = $producto;
+                }
 
                 return $productos;
 
@@ -72,24 +78,28 @@
          * @return array Un array de objetos Producto que cumplen con los criterios de búsqueda.
          */
 
-        public static function searchByStock(Int $stock, Proveedor $proveedor) : Array{
+        public static function getStock(Int $stock, Proveedor $proveedor) : Array{
             include_once( __DIR__ . '/../Conexion/Conexion.php');
             $conexion = Conexion::conectarDB();
             $productos = [];
-
             try{
                 $sql = "SELECT * FROM productos WHERE Stock <= :Stock AND CodigoProveedor = :CodigoProveedor";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute(["Stock" => $stock, "CodigoProveedor" => $proveedor->getCodigo()]);
-                $sentencia->setFetchMode(PDO::FETCH_CLASS, "Producto");
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
 
-                $productos = $sentencia->fetchAll();
+                while($producto = $sentencia->fetch()){
+                    $producto = new Producto($producto["Codigo"], $producto["Nombre"], $producto["Descripcion"], $producto["Precio"], $producto["Stock"],$proveedor);
+                    $productos[] = $producto;
+                }
 
-                return $productos;
+                
                 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
+
+            return $productos;
         }
 
         /**
@@ -98,33 +108,40 @@
          * @param Proveedor $proveedor El proveedor del cual se obtendrán los productos.
          * @return array Los productos del proveedor.
          */
-        public static function searchByProveedor(Proveedor $proveedor) : Array{
+        public static function getProveedor(Proveedor $proveedor) : Array{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
+
             $productos = [];
-          // $codigoProveedor = $proveedor->getCodigo();
+             $codigoProveedor = $proveedor->getCodigo();
 
             try{
+
+                $conexion = Conexion::conectarDB();
                 $sql = "SELECT * FROM productos WHERE CodigoProveedor = :CodigoProveedor";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->setFetchMode(PDO::FETCH_CLASS, "Producto");
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
                 $sentencia->execute(["CodigoProveedor" => $proveedor->getCodigo()]);
 
-                $productos = $sentencia->fetchAll();
-                // mONTAR ARRAY
+                // montar proveedor
+                $proveedor = ProveedorDB::getProveedor($codigoProveedor);
 
                 while($producto = $sentencia->fetch()){
+                    $producto = new Producto($producto["Codigo"], $producto["Nombre"], $producto["Descripcion"], $producto["Precio"], $producto["Stock"],$proveedor);
                     $productos[] = $producto;
                 }
-                // montar proveedor
-                
 
-                return $productos;
+                $proveedor->setProductos($productos);
+
+
+                
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
+
+            return $productos;
+
         }
 
         /**
@@ -135,14 +152,15 @@
          * @return bool Devuelve true si el producto se borró correctamente, false en caso contrario.
          */
 
-        public static function delete(Producto $producto) : bool{
+        public static function delete(Producto $producto, Proveedor $proveedor) : bool{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
-            $conexion = Conexion::conectarDB();
             $borradoCorrectamente = false;
             $codigo = $producto->getProveedor()->getCodigo();
 
             try{
+
+                $conexion = Conexion::conectarDB();
                 $sql = "DELETE FROM productos WHERE Codigo = :Codigo AND CodigoProveedor = :CodigoProveedor";
                 $sentencia = $conexion->prepare($sql);
                 $borradoCorrectamente = $sentencia->execute(["Codigo" => $codigo, "CodigoProveedor" => $proveedor->getCodigo()]);
@@ -163,7 +181,7 @@
          * @return bool Devuelve true si el producto se actualizó correctamente, false en caso contrario.
          */
 
-        public static function update(Producto $producto) : bool{
+        public static function update(Producto $producto, Proveedor $proveedor) : bool{
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
             $conexion = Conexion::conectarDB();

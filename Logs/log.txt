@@ -1,0 +1,52 @@
+[26-Jan-2024 13:02:55 Europe/Berlin] El proveedor Código: B;OrCno,FY<br>Correo: jorgelopezbravo1998@gmail.com<br>Contraseña: $2y$10$zY6cqk0vDWjtECoEgWKJXe7iyL5UKdo4yOosJl8ghXvcLjkQQxtrS<br>Nombre: Rythas el desertor<br>Apellidos: Lopez<br> ha iniciado sesión correctamente
+[26-Jan-2024 13:02:55 Europe/Berlin] El codigo de la sesion es: B;OrCno,FY
+[26-Jan-2024 13:02:55 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:02:55 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:02:55 Europe/Berlin] Productos obtenidos: 0
+[26-Jan-2024 13:02:57 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:02:57 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:02:57 Europe/Berlin] Productos obtenidos: 0
+[26-Jan-2024 13:03:07 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 221
+[26-Jan-2024 13:03:07 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:03:07 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:03:07 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:03:19 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:03:19 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:03:19 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:03:22 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:03:22 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:03:22 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:03:24 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 136
+[26-Jan-2024 13:03:27 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 136
+[26-Jan-2024 13:03:30 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 136
+[26-Jan-2024 13:03:30 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:03:30 Europe/Berlin] El codigo del proveedor es: B;OrCno,FY
+[26-Jan-2024 13:03:30 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:03:39 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 60
+[26-Jan-2024 13:03:39 Europe/Berlin] Error en la linea 65 en el archivo C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php con el mensaje Call to undefined method ProductosDB::getProveedorStock()
+[26-Jan-2024 13:04:58 Europe/Berlin] Error en la linea 36 en el archivo C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Modelo\ProveedorDB.php con el mensaje SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'B;OrCno,FY' for key 'PRIMARY'
+[26-Jan-2024 13:05:16 Europe/Berlin] El proveedor Código: 12345<br>Correo: jorge@gmail.com<br>Contraseña: $2y$10$2ebKH/5/Rw.Wt3Il08J.2eAtAtWpB3ZyaHH1K35qV9Fh8NIxkaYBi<br>Nombre: Jorge el Mago<br>Apellidos: Lopez<br> ha iniciado sesión correctamente
+[26-Jan-2024 13:05:16 Europe/Berlin] El codigo de la sesion es: 12345
+[26-Jan-2024 13:05:17 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:05:17 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:17 Europe/Berlin] Productos obtenidos: 0
+[26-Jan-2024 13:05:20 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:05:20 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:20 Europe/Berlin] Productos obtenidos: 0
+[26-Jan-2024 13:05:32 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 221
+[26-Jan-2024 13:05:32 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:05:32 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:32 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:05:45 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 221
+[26-Jan-2024 13:05:45 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:05:45 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:45 Europe/Berlin] Productos obtenidos: 2
+[26-Jan-2024 13:05:51 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 60
+[26-Jan-2024 13:05:51 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:51 Europe/Berlin] Productos obtenidos: 1
+[26-Jan-2024 13:05:56 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 25
+[26-Jan-2024 13:05:56 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:05:56 Europe/Berlin] Productos obtenidos: 2
+[26-Jan-2024 13:06:04 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\JorgeMSI\Downloads\ProyectoFinalT4-master\ProyectoFinalT4-master\Controlador\ControladorProductos.php on line 97
+[26-Jan-2024 13:06:04 Europe/Berlin] El codigo del proveedor es: 12345
+[26-Jan-2024 13:06:04 Europe/Berlin] Productos obtenidos: 1

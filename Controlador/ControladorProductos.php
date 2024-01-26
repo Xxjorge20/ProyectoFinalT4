@@ -62,7 +62,7 @@
 
             $stock = $_POST["stock"];
 
-            $productos = ProductosDB::getProveedorStock($stock, $proveedor);
+            $productos = ProductosDB::getStock($stock, $proveedor);
 
             error_log("El codigo del proveedor es: " . $proveedor->getCodigo());
             

@@ -61,3 +61,7 @@ modificar sus datos.
 
 <hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
 
+1.05 Correccion a la hora de buscar por stock y solucion de los conflictos
+de los archivos.
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">

@@ -6,8 +6,28 @@
     <title>Pagina Inicio</title>
     <link rel="stylesheet" href="../Estilos/style.css">
     <link rel="icon" type="image/jpg" href="../Estilos/Imagenes/Logo.jpg">
+    <script src="../Controlador/funciones.js"></script>
 </head>
 <body>
+
+    <?php
+
+
+        // Evitar el cacheo de la página
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
+        include_once '../Modelo/Proveedor.php';
+        error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
+        ini_set('ignore_repeated_errors', TRUE); // always use TRUE
+        ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
+        ini_set('log_errors', TRUE); // Error/Exception file logging engine.
+        ini_set('error_log', '../Logs/log.txt'); // Logging file path
+        session_start();
+        $proveedor = null;
+        $_SESSION['proveedor'] = $proveedor;
+    ?>
 
     <div id = "cabecera">
         <div id = "logo">
@@ -36,37 +56,18 @@
             <br>
             <input type="submit" value="Logear" name="logearUsuario">
         </form>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <input type="submit" value="Registrar" name="registrarUsuario">
-        </form>
-
-
     </div>
 
-    <div id="respuesta">
+    
         <?php
             include_once '../Controlador/controladorUsuario.php';
 
             if(isset($_POST['logearUsuario'])){
-
-                $escorrecto = loginUsuario();
-                if($escorrecto){
-                    // Informamos al usuario de que se ha registrado correctamente
-                    echo "<script>alert('Usuario logeado correctamente');</script>";
-                    // Redirigimos al usuario a la página de login
-                    echo "<script>window.location.href='../Vista/formMostrarTodos.php';</script>";                 
-                }else{
-                    echo "<h1>Usuario no Logeado Correctamente</h1>";
-                }
+                logearProveedor();
             }
 
-            if(isset($_POST['registrarUsuario'])){
-                // Redirigimos al usuario a la página de registro
-                echo "<script>window.location.href='../Vista/formRegistro.php';</script>";
-            }
         ?>
-    </div>
+
 
     <footer class="pie">
         <!-- Sección "Dónde estamos" -->

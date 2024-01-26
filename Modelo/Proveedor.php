@@ -22,11 +22,11 @@
         }
 
         // Getters y Setters
-        public function getCodigo() : int {
+        public function getCodigo() : String {
             return $this->Codigo;
         }
 
-        public function setCodigo(int $codigo) : void {
+        public function setCodigo(String $codigo) : void {
             $this->Codigo = $codigo;
         }
 

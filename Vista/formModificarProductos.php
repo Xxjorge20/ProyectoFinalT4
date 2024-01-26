@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    <link rel="stylesheet" href="../Estilos/style.css">
+    <link rel="icon" type="image/jpg" href="../Estilos/Imagenes/Logo.jpg">
+</head>
+<body>
+        <?php
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache"); 
+
+            /* Bloque de codigo para evitar los warnigs y mandarlos al archivo log*/ 
+            error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
+            ini_set('ignore_repeated_errors', TRUE); // always use TRUE
+            ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
+            ini_set('log_errors', TRUE); // Error/Exception file logging engine.
+            ini_set('error_log', '../Logs/log.txt'); // Logging file path
+        ?>
+
+
+        <div id = "cabecera">
+            <div id = "logo">
+                <a href="formPaginaPrincipal.php"><img src="../Estilos/Imagenes/banner.jpg" alt="logo"></a>
+            </div>
+
+            <div id = "menu">
+                <ul>
+                    <li><a href="formProductos.php">Gestionar Productos</a></li>
+                    <li><a href="formInsertarProductos.php">Insertar Producto</a></li>
+                    <li><a href="formModificarProductos.php">Modificar Producto</a></li>
+                    <li><a href="formBorrarProductos.php">Borrar Producto</a></li>
+                    <li><a href="formProveedor.php">Gestionar Proveedor</a></li>
+                    <li><a href="index.php">Cerrar Sesion</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id = "form">
+            <div id="form">
+                <?php 
+                    include_once '../Controlador/ControladorProductos.php';
+                    include_once '../Controlador/ControladorUsuario.php';
+                    session_start();
+                    mostrarMensajeBienvenida();
+
+                    $productos = obtenerProductosNombre();
+                ?>
+
+                
+
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <label for="codigo">Codigo</label>
+                    <select name="codigo" id="codigo">
+                        <?php
+                            foreach ($productos as $productos => $valor) {
+                                if (is_array($valor)) {
+                                    // Si $valor es un array, puedes manejarlo de la manera que prefieras, por ejemplo, puedes convertirlo a una cadena
+                                    $valor = implode(', ', $valor);
+                                }
+                                echo '<option value="' . $valor->getCodigo() . '">' . $valor->getNombre() . '</option>';
+                            }
+                        ?>
+                    </select>
+
+                    <input type="submit" value="Modificar Producto" name="modificarProducto">
+                </form>
+
+                <?php
+                    include_once '../Controlador/ControladorProductos.php';
+                    if(isset($_POST["modificarProducto"])){ 
+                      $producto = cargarCodigo();
+                      ?>
+                    
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        <label for="codigo">Codigo</label>
+                        <input type="text" name="codigo" id="codigo" value="<?php echo $producto->getCodigo(); ?>" readonly>
+
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" value="<?php echo $producto->getNombre(); ?>">
+
+                        <label for="descripcion">Descripcion</label>
+                        <input type="text" name="descripcion" id="descripcion" value="<?php echo $producto->getDescripcion(); ?>">
+
+                        <label for="precio">Precio</label>
+                        <input type="text" name="precio" id="precio" value="<?php echo $producto->getPrecio(); ?>">
+
+                        <label for="stock">Stock</label>
+                        <input type="text" name="stock" id="stock" value="<?php echo $producto->getStock(); ?>">
+
+                        <input type="submit" value="Modificar" name="modificar">
+                    </form>
+
+                <?php } ?>
+
+                <?php
+                    if(isset($_POST["modificar"])){
+                        include_once '../Controlador/ControladorProductos.php';
+                        modificarProducto();
+                    }
+                ?>
+
+                    
+            </div>
+        </div>
+
+
+    <footer class="pie">
+        <!-- Sección "Dónde estamos" -->
+        <div class="footer-section">
+            <h4>Dónde estamos</h4>
+            <div class="map-widget">
+                <p>Dirección: Reino De Luque, S/N</p>
+                <p>Ciudad: Luque</p>
+                <p>Código Postal: 14880</p>
+            </div>
+        </div>
+        <!-- Sección "Contacto" -->
+        <div class="footer-section">
+            <h4>Contacto</h4>
+            <p>Teléfono: +34 123 456 789</p>
+            <p>Email: info@reinodeluque.es</p>
+        </div>
+    
+        <!-- Sección "Redes Sociales" -->
+        <div class="footer-section">
+            <h4>Redes Sociales</h4>
+            <div class="social-icons">
+                <a href="https://dnd.wizards.com/es"><img src="../Estilos/RedesSociales/facebook.png" alt="PagOficial" width="40" height="40"></a>
+                <a href="https://twitter.com/MultiExt"><img src="../Estilos/RedesSociales/X.png" alt="Twitter" width="40" height="40"></a>
+                <a href="https://www.instagram.com/dndwizards/"><img src="../Estilos/RedesSociales/instagram.png" alt="Instagram" width="40" height="40"></a>
+                <a href="https://www.youtube.com/@lynxreviewer"><img src="../Estilos/RedesSociales/youtube.png" alt="YouTube" width="40" height="40"></a>
+            </div>
+        </div>
+    
+        <!-- Widget de verificación W3C -->
+        <div class="footer-section">
+            <h4>Verificado por W3C</h4>
+            <p>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px"
+                        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                        alt="¡CSS Válido!" />
+                    </a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

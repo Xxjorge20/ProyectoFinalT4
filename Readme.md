@@ -47,3 +47,17 @@ Este proyecto ha sido desarrollado por el Reino de Luque
 <hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
 
 1.02 Comprobacion de las clases de modelo para que funcionen perfectamente e implementacion de los primeros formularios
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+
+1.03 Implementacion de los formularios de login y register con sus respectivos controladores
+y control de errores a traves de alerts y mandarlos a un archivo log para su control.
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+
+1.04 Implementacion del uso de la session para manejar el proveedor en los distintos formularios, e implementacion de la pagina principal
+y los distintos formularios para permitir la modificacion, insercion y borrar de los distintos productos. Tambien se le permite al proveedor
+modificar sus datos.
+
+<hr style="height: 2px; background-color: #333; box-shadow: 0 0 10px 1px #333;">
+

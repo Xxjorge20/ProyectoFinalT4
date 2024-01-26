@@ -1,5 +1,12 @@
 <?php
 
+    error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
+    ini_set('ignore_repeated_errors', TRUE); // always use TRUE
+    ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
+    ini_set('log_errors', TRUE); // Error/Exception file logging engine.
+    ini_set('error_log', '../Logs/log.txt'); // Logging file path
+
+
     class ProductosDB
     {
         /**
@@ -32,6 +39,7 @@
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
                 return false;
             }
     
@@ -67,6 +75,7 @@
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
             }
         }
 
@@ -97,6 +106,7 @@
                 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
             }
 
             return $productos;
@@ -112,7 +122,7 @@
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
 
-            $productos = [];
+             $productos = [];
              $codigoProveedor = $proveedor->getCodigo();
 
             try{
@@ -138,6 +148,7 @@
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
             }
 
             return $productos;
@@ -156,19 +167,21 @@
 
             include_once( __DIR__ . '/../Conexion/Conexion.php');
             $borradoCorrectamente = false;
-            $codigo = $producto->getProveedor()->getCodigo();
+            $codigoProducto = $producto->getCodigo();
+            $codigoProveedor = $proveedor->getCodigo();
 
             try{
 
                 $conexion = Conexion::conectarDB();
                 $sql = "DELETE FROM productos WHERE Codigo = :Codigo AND CodigoProveedor = :CodigoProveedor";
                 $sentencia = $conexion->prepare($sql);
-                $borradoCorrectamente = $sentencia->execute(["Codigo" => $codigo, "CodigoProveedor" => $proveedor->getCodigo()]);
+                $borradoCorrectamente = $sentencia->execute(["Codigo" => $codigoProducto, "CodigoProveedor" => $codigoProveedor]);
 
                 return $borradoCorrectamente;
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
                 return false;
             }
         }
@@ -203,10 +216,37 @@
 
             }catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
                 return false;
+            }
+        }
+
+        /**
+         * Obtiene un producto por su código y proveedor.
+         *
+         * @param string $codigo El código del producto.
+         * @param Proveedor $proveedor El proveedor del producto.
+         * @return Producto El producto encontrado.
+         */
+        public static function getByCodigo(string $codigo ,Proveedor $proveedor) : Producto {
+            include_once( __DIR__ . '/../Conexion/Conexion.php');
+            $conexion = Conexion::conectarDB();
+            
+            try{
+                $sql = "SELECT * FROM productos WHERE Codigo = :Codigo AND CodigoProveedor = :CodigoProveedor";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute(["Codigo" => $codigo, "CodigoProveedor" => $proveedor->getCodigo()]);
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+                $producto = $sentencia->fetch();
+                $producto = new Producto($producto["Codigo"], $producto["Nombre"], $producto["Descripcion"], $producto["Precio"], $producto["Stock"],$proveedor);
+                return $producto;
+            }catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+                Error_log("Error en la linea " . $e->getLine() . " en el archivo " . $e->getFile() . " con el mensaje " . $e->getMessage());
             }
         }
 
     }
 
 ?>
+

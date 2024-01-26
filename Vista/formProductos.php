@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Registro</title>
+    <title>Pagina Principal</title>
     <link rel="stylesheet" href="../Estilos/style.css">
     <link rel="icon" type="image/jpg" href="../Estilos/Imagenes/Logo.jpg">
 </head>
 <body>
-
-            <?php
-
-            include_once '../Modelo/Proveedor.php';
-
+    
+        <?php
             header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
             header("Cache-Control: post-check=0, pre-check=0", false);
             header("Pragma: no-cache"); 
@@ -23,56 +20,92 @@
             ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
             ini_set('log_errors', TRUE); // Error/Exception file logging engine.
             ini_set('error_log', '../Logs/log.txt'); // Logging file path
-            ?>
+        ?>
 
 
         <div id = "cabecera">
             <div id = "logo">
-                <a href="index.php"><img src="../Estilos/Imagenes/banner.jpg" alt="logo"></a>
+                <a href="formPaginaPrincipal.php"><img src="../Estilos/Imagenes/banner.jpg" alt="logo"></a>
             </div>
 
             <div id = "menu">
                 <ul>
-                    <li><a href="formRegistro.php">Registrar Usuario</a></li>
-                    <li><a href="index.php">Iniciar Sesion</a></li>
+                    <li><a href="formProductos.php">Gestionar Productos</a></li>
+                    <li><a href="formInsertarProductos.php">Insertar Producto</a></li>
+                    <li><a href="formModificarProductos.php">Modificar Producto</a></li>
+                    <li><a href="formBorrarProductos.php">Borrar Producto</a></li>
+                    <li><a href="formProveedor.php">Gestionar Proveedor</a></li>
+                    <li><a href="index.php">Cerrar Sesion</a></li>
                 </ul>
             </div>
         </div>
 
         <div id = "form">
-        <h1>Gestion Usuario - Registrar Usuario</h1>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <?php 
+                    include_once '../Controlador/ControladorUsuario.php';
+                    session_start();
+                    mostrarMensajeBienvenida();
+                ?>
+        </div>
 
-            <label for="codigo">Codigo</label>
-            <input type="text" name="codigo" id="codigo" required>
-            <br>
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" required>
-            <br>
-            <label for="apellidos">Apellidos</label>
-            <input type="text" name="apellidos" id="apellidos" required>
-            <br>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <br>
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" required>   
-            <br>
-            <br>
-            <input type="submit" value="registrar Usuario" name="registrarUsuario">
-            <br>
-            
-        </form>
-    </div>
+        <div id = "form">
 
-        <?php
-            include_once '../Controlador/ControladorUsuario.php';
 
-            if(isset($_POST['registrarUsuario'])){
 
-                registrarProveedor();
-            }
-        ?>
+            <div id = "tabla">
+
+                    <h1>Productos</h1>
+
+                    <table>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+
+                        <?php
+                            include_once '../Controlador/ControladorProductos.php';
+                            if(isset($_POST["stock"])){
+                                cargarProductosStock();
+                            }else if(isset($_POST["descripcion"])){
+                                cargarProductosDescripcion();
+                            }else{
+                                cargarProductos();
+                            }
+                        ?>
+
+                    </table>
+            </div>
+        </div>
+
+        
+        <div id="form">
+
+
+                <!-- consultar por stock -->
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <h1>Consultar por stock</h1>
+                    <label for="stock">Stock</label>
+                    <input type="number" name="stock" id="stock" required>
+                    <br>
+                    <br>
+                    <input type="submit" value="Consultar">
+                </form>
+
+                <!-- consultar por descripcion -->
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <h1>Consultar por descripcion</h1>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="descripcion" required>
+                    <br>
+                    <br>
+                    <input type="submit" value="Consultar">
+                </form>
+        </div>
+
+
 
     <footer class="pie">
         <!-- Sección "Dónde estamos" -->
